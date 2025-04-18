@@ -1,0 +1,14 @@
+h2 {
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-row {
+    text-align: center;
+}

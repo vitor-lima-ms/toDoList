@@ -1,0 +1,27 @@
+{% extends "taskList.html" %}
+
+{% block title %}{% endblock title %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'taskList.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container">
+    <div class="card text-center">
+      <div class="card-header">
+        {{  task.category }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <p class="card-text">{{ task.description }}</p>
+        <a href="{% url "tasks:completeTask" task.id %}" class="btn btn-primary">Complete</a>
+        <a href="{% url "tasks:deleteTaskList" task.id %}" class="btn btn-danger">Delete</a>
+      </div>
+      <div class="card-footer text-body-secondary">
+        {{ task.due_date }}
+      </div>
+    </div>
+  </div>
+{% endblock content %}
