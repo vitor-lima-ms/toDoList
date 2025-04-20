@@ -1,19 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 
 import requests
 
 from tasks.models import Tasks
-from tasks.myForms import TaskSearchNotCompleted, TaskSearchCompleted
+from tasks.myForms import TaskSearchNotCompleted, TaskSearchCompleted, CreateTask
 
 # Create your views here.
 
-class TaskCreateView(CreateView):
-    model = Tasks
-    fields = ['title', 'category', 'description', 'due_date']
-    template_name = 'taskCreate.html'
-    success_url = reverse_lazy('tasks:taskList')
+def TaskCreateView(request):
+    if request.method == 'POST':
+        form = CreateTask(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks:taskList')
+    else:
+        form = CreateTask()
+    return render(request, 'taskCreate.html', {'form': form})
 
 def TaskListView(request):
     notCompletedTasks = Tasks.objects.filter(completed=False)
