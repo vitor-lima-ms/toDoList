@@ -7,7 +7,7 @@ app_name = 'tasks'
 urlpatterns = [
     path('', views.TaskListView, name='taskList'),
 
-    path('create/', views.TaskCreateView.as_view(), name='taskCreate'),
+    path('create/', views.TaskCreateView, name='taskCreate'),
 
     path('search-not-completed/', views.searchTaskNotCompleted, name='taskSearchNotCompleted'),
 
